@@ -13,13 +13,14 @@ export default function HomePage() {
       {Array.from({ length: 30 }).map((_, i) => (
         <span
           key={i}
-          className={`absolute text-2xl sm:text-4xl`}
+          className="absolute text-2xl sm:text-4xl"
           style={{
             top: `${Math.random() * 90}%`,
             left: `${Math.random() * 90}%`,
             color: `hsl(${Math.random() * 360}, 80%, 50%)`,
             animation: `float ${5 + Math.random() * 5}s ease-in-out infinite`,
             fontWeight: 'bold',
+            zIndex: 0, // derrière tout le reste
           }}
         >
           {symbols[Math.floor(Math.random() * symbols.length)]}
@@ -27,22 +28,23 @@ export default function HomePage() {
       ))}
 
       {/* Bande supérieure */}
-      <header className="w-full bg-blue-600 text-white flex justify-between items-center px-8 py-4 relative">
+      <header className="w-full bg-blue-600 text-white flex justify-between items-center px-8 py-4 fixed top-0 z-50">
         <h1 className="text-2xl font-bold mx-auto absolute left-1/2 transform -translate-x-1/2">NumberUp</h1>
         <Link
           href="/login"
-          className="ml-auto bg-white text-blue-600 px-4 py-2 rounded-full font-semibold hover:bg-gray-200 transition"
+          className="ml-auto bg-white text-blue-600 px-4 py-2 rounded-full font-semibold hover:bg-gray-200 transition z-50"
         >
           Se connecter
         </Link>
       </header>
 
       {/* Contenu central */}
-      <section className="flex flex-col items-center justify-center text-center min-h-[calc(100vh-128px)]">
+      <section className="flex flex-col items-center justify-center text-center min-h-screen">
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.8 }}
+          className="z-10"
         >
           <Link
             href="/niveau"
@@ -54,7 +56,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="w-full bg-blue-600 text-white py-4 text-center text-sm">
+      <footer className="w-full bg-blue-600 text-white py-4 text-center text-sm fixed bottom-0 z-50">
         <p>© {new Date().getFullYear()} NumberUp</p>
         <p>
           <Link href="/contact" className="underline">Contact</Link> | 
