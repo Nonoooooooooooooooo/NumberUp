@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function HomePage() {
-  // Les symboles/chiffres colorés
   const symbols = ["1","2","3","4","5","6","7","8","9","0","+","-","×","÷","=","π","√","∞","%"];
 
   return (
@@ -28,7 +27,7 @@ export default function HomePage() {
       ))}
 
       {/* Bande supérieure */}
-      <header className="w-full bg-blue-600 text-white flex justify-between items-center px-8 py-4">
+      <header className="w-full bg-blue-600 text-white flex justify-between items-center px-8 py-4 relative">
         <h1 className="text-2xl font-bold mx-auto absolute left-1/2 transform -translate-x-1/2">NumberUp</h1>
         <Link
           href="/login"
@@ -47,7 +46,7 @@ export default function HomePage() {
         >
           <Link
             href="/niveau"
-            className="px-10 py-5 bg-blue-600 text-white text-xl font-bold rounded-full shadow-lg hover:bg-blue-700 transition"
+            className="px-12 py-5 bg-blue-600 text-white text-xl font-bold rounded-full shadow-lg hover:bg-blue-700 transition"
           >
             Commencer →
           </Link>
