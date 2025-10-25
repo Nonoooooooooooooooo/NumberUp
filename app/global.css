@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@700&display=swap');
+
+/* Background animé avec dégradé mouvant */
+@keyframes gradient-bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.bg-animated {
+  background: linear-gradient(270deg, #007AFF, #00FFD1, #FF9500);
+  background-size: 600% 600%;
+  animation: gradient-bg 20s ease infinite;
+}
+
+/* Animation des cartes */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.card-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+.card-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Fonts */
+body {
+  font-family: 'Inter', sans-serif;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Poppins', sans-serif;
+}
