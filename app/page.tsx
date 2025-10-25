@@ -4,70 +4,72 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function HomePage() {
-  return (
-    <main className="min-h-screen flex flex-col items-center justify-center text-center bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 text-white font-sans px-6">
+  // Les symboles/chiffres colorés
+  const symbols = ["1","2","3","4","5","6","7","8","9","0","+","-","×","÷","=","π","√","∞","%"];
 
-      {/* Header */}
-      <header className="w-full flex justify-center items-center mb-16">
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-wide">NumberUp</h1>
+  return (
+    <main className="relative min-h-screen font-sans bg-[#fdf6e3] overflow-hidden">
+
+      {/* Chiffres et symboles animés */}
+      {Array.from({ length: 30 }).map((_, i) => (
+        <span
+          key={i}
+          className={`absolute text-2xl sm:text-4xl`}
+          style={{
+            top: `${Math.random() * 90}%`,
+            left: `${Math.random() * 90}%`,
+            color: `hsl(${Math.random() * 360}, 80%, 50%)`,
+            animation: `float ${5 + Math.random() * 5}s ease-in-out infinite`,
+            fontWeight: 'bold',
+          }}
+        >
+          {symbols[Math.floor(Math.random() * symbols.length)]}
+        </span>
+      ))}
+
+      {/* Bande supérieure */}
+      <header className="w-full bg-blue-600 text-white flex justify-between items-center px-8 py-4">
+        <h1 className="text-2xl font-bold mx-auto absolute left-1/2 transform -translate-x-1/2">NumberUp</h1>
+        <Link
+          href="/login"
+          className="ml-auto bg-white text-blue-600 px-4 py-2 rounded-full font-semibold hover:bg-gray-200 transition"
+        >
+          Se connecter
+        </Link>
       </header>
 
-      {/* Hero Section */}
-      <section className="max-w-3xl">
-        <motion.h2
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-4xl sm:text-5xl font-extrabold mb-6 leading-snug"
+      {/* Contenu central */}
+      <section className="flex flex-col items-center justify-center text-center min-h-[calc(100vh-128px)]">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.8 }}
         >
-          Progresse en maths, un défi à la fois 🧠
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-lg sm:text-xl mb-10"
-        >
-          Résous des problèmes adaptés à ton niveau, gagne des points et deviens un vrai champion des nombres !
-        </motion.p>
-
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Link
             href="/niveau"
-            className="px-12 py-4 rounded-full bg-white text-blue-600 font-bold text-lg shadow-lg hover:bg-gray-100 transition"
+            className="px-10 py-5 bg-blue-600 text-white text-xl font-bold rounded-full shadow-lg hover:bg-blue-700 transition"
           >
             Commencer →
           </Link>
         </motion.div>
       </section>
 
-      {/* Features */}
-      <section className="mt-24 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-5xl">
-        {[
-          { icon: "📝", title: "Résous des problèmes", text: "Des exercices adaptés à ton niveau." },
-          { icon: "📊", title: "Suivi de progression", text: "Garde un œil sur tes scores." },
-          { icon: "🏆", title: "Défie tes amis", text: "Partage tes scores et rivalise avec tes camarades." },
-        ].map((f, i) => (
-          <motion.div
-            key={i}
-            className="p-6 bg-white/20 backdrop-blur-md rounded-2xl shadow-md hover:shadow-xl transition text-white"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.2 }}
-          >
-            <span className="text-5xl mb-4 block">{f.icon}</span>
-            <h3 className="text-xl font-semibold mb-2">{f.title}</h3>
-            <p className="text-sm sm:text-base">{f.text}</p>
-          </motion.div>
-        ))}
-      </section>
-
       {/* Footer */}
-      <footer className="w-full mt-32 py-8 text-center text-white/80">
-        © {new Date().getFullYear()} NumberUp — Apprendre en s’amusant 🎯
+      <footer className="w-full bg-blue-600 text-white py-4 text-center text-sm">
+        <p>© {new Date().getFullYear()} NumberUp</p>
+        <p>
+          <Link href="/contact" className="underline">Contact</Link> | 
+          <Link href="/mentions-legales" className="underline ml-2">Mentions légales</Link>
+        </p>
       </footer>
+
+      {/* Animations flottantes */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+        }
+      `}</style>
     </main>
   );
 }
-
