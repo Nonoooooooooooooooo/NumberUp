@@ -1,4 +1,4 @@
-import './globals.css'; // ← ajoute cette ligne en haut
+import './app/globals.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
